@@ -1,7 +1,7 @@
 # 密码强度
 
 
-<mark> 已包含特殊符号的计分，但是当前所有项目的密码均是不允许包含特殊符号的 </mark>
+<mark> 已包含特殊符号的计分</mark>
 ## 一：验证流程
 <img src="http://whj.fayfox.com/img/github/passwordStrength.png"/>
 
