@@ -3,7 +3,7 @@
 
 <mark> 已包含特殊符号的计分</mark>
 ## 一：验证流程
-<img src="http://whj.fayfox.com/img/github/passwordStrength.png"/>
+
 
 ## 二：分数计算
 <mark> 初始分数 = 0 </mark>
