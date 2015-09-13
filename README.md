@@ -5,7 +5,8 @@
 - V1.0.0 ： 创建该插件
  
 ###兼容性
-- IE6+
+- IE9+（支持可见可选）
+- IE8-（暂时不支持可见）
 
 ###线上地址
 - [戳这里](http://whj.fayfox.com/demo/plugIn.passwordStrength/)
