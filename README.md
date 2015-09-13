@@ -1,10 +1,36 @@
 # 密码强度
 
+## 一：插件说明
+###最近更新
+- V1.0.0 ： 创建该插件
+ 
+###兼容性
+- IE6+
+
+###线上地址
+- [戳这里](http://whj.fayfox.com/demo/plugIn.passwordStrength/)
+
+###参数说明
+<pre>
+ * 以下均为必填参数
+ * 无
+ *
+ * 以下均为可选参数
+ * id : string		//该dom的id号
+ * color : arr		//显示强度颜色	["默认色"，"描边色"，"强度色"]
+ * weak : arr		//弱密码数组
+ * tips ：object	//提示语{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","success":"可用"}
+ * eyes : boolean	//是否出现密码可见icon true = 出现; false = 隐藏
+ * len : arr[number,number]	//长度区间	[最小值，最大值]
+ * type ：number		//标准 0 = 只要长度够，都可以; 1 = 数字加字母组合; 2 = 数字加字母加符号
+ * call ：function	//回调方法
+</pre>
+
+###使用方法
+下次来补充。。
+
 
 <mark> 已包含特殊符号的计分</mark>
-## 一：验证流程
-
-
 ## 二：分数计算
 <mark> 初始分数 = 0 </mark>
 ### 1.判断长度
