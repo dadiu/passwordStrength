@@ -62,12 +62,12 @@
 					objs.eyes.mousedown(function(){
 						$(this).html(options.eyesArr[1]);
 						domName.prop("type","text");
-						alert("11");
+						//alert("11");
 					});
 					objs.eyes.mouseup(function(){
 						$(this).html(options.eyesArr[0]);
 						domName.prop("type","password");
-						alert(domName.prop("type"));
+						//alert(domName.prop("type"));
 					});
 				};
 
