@@ -52,22 +52,25 @@
 				//组装DOM
 				domName.parent().append(objs.bar);
 				objs.bar.append(domName);
-
 				//是否显示密码可见按钮
 				if(options.eyes == true){
+
 					objs.eyes.html(options.eyesArr[0]);
 					objs.bar.append(objs.eyes);
+
+					//如果是 小于等于 IE8 则隐藏 点击密码可见功能
+					if($.browser.msie && $.browser.version <= 8.0){
+						objs.eyes.hide();
+					};
 
 					//鼠标按下
 					objs.eyes.mousedown(function(){
 						$(this).html(options.eyesArr[1]);
 						domName.prop("type","text");
-						//alert("11");
 					});
 					objs.eyes.mouseup(function(){
 						$(this).html(options.eyesArr[0]);
 						domName.prop("type","password");
-						//alert(domName.prop("type"));
 					});
 				};
 
@@ -81,7 +84,6 @@
 				domName.keyup(function(){
 					dfunc.ver($(this).val());
 				});
-
 			},
 
 			//验证
@@ -93,6 +95,7 @@
 				//1. 如果长度小于6
 				if(vLen < 6){
 					objs.tips.html(options.tips[1]);
+					dfunc.countResult(0);
 					return false;
 				};
 
@@ -199,13 +202,13 @@
 			countResult : function(LV){
 
 				if(LV >= 5) {
-					objs.levelColor.animate({"width":"100%"});
+					objs.levelColor.animate({"width":"100%"},300);
 				} else if( LV ==4 ){
-					objs.levelColor.animate({"width":"66.7%"});
+					objs.levelColor.animate({"width":"66.7%"},300);
 				} else if( LV > 1 && LV < 4 ) {
-					objs.levelColor.animate({"width":"33.4%"});
+					objs.levelColor.animate({"width":"33.4%"},300);
 				} else {
-					objs.levelColor.animate({"width":0});
+					objs.levelColor.animate({"width":0},300);
 				}
 			}
 		};

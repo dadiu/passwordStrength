@@ -11,7 +11,7 @@
 <body>
 <style>
 	.inp { width:200px; padding:5px; line-height:20px; border:1px solid #ccc; border-bottom:0; margin-right:10px; }
-	.m_pBar { position:relative; }
+	.m_pBar { position:relative; overflow:hidden; height:34px; }
 	.m_pBar .ic_eyes { position:absolute; left:180px; top:2px; width:30px; line-height:25px; font-size:24px; text-align:center; text-decoration:none; color:#000; background:#fff; }
 	.m_pLevelBar { width:212px; height:3px; margin:0; background:#ccc; }
 	.m_pLevelColor { display:block; width:0; height:3px; }
@@ -34,7 +34,7 @@
 		<input type="password" id="password" class="inp"/>
 	</div>
 	<script src="http://whj.fayfox.com/js/jquery-1.8.3.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery.passwordStrength.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/jquery.passwordStrength.min.js" charset="utf-8"></script>
 	<script type="text/javascript">
 		$("#password").passwordStrength();
 		$("#password").focus();
