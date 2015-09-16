@@ -31,13 +31,25 @@
     -moz-osx-font-smoothing: grayscale;}
 </style>
 	<div>
-		<input type="password" id="password" class="inp"/>
+		<p>支持大于6位 & 不是弱密码的所有密码</p>
+		<input type="password" id="password1" class="inp"/>
+	</div>
+	<div>
+		<p>支持大于6位 & 不是弱密码 & 数字+字母 的所有密码</p>
+		<input type="password" id="password2" class="inp"/>
 	</div>
 	<script src="http://whj.fayfox.com/js/jquery-1.8.3.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.passwordStrength.min.js" charset="utf-8"></script>
 	<script type="text/javascript">
-		$("#password").passwordStrength();
-		$("#password").focus();
+		$("#password1").passwordStrength({
+			callback:function(){
+				$("#password1").keyup(function(){
+					console.log($(this).val());
+				})
+			}
+		});
+		$("#password2").passwordStrength({judgeType:1});
+		$("#password2").focus();
 	</script>
 </body>
 </html>

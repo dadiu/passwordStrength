@@ -1,21 +1,20 @@
 /**
  * @url     --
- * @data    2015.08.26
+ * @data    2015.09.16
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.0.0
+ * @version V1.1.0 - 增加判断定义模式+callback；删除id和len属性
  */
 /********************* 传参说明 *********************/
 /**
  * 以下均为可选参数
- * id : string		//该dom的id号
- * color : arr		//显示强度颜色	["默认色"，"描边色"，"强度色"]
- * weak : arr		//弱密码数组
- * tips ：object		//提示语		{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","success":"可用"}
- * eyes : boolean	//是否出现密码可见icon true = 出现; false = 隐藏
- * len : arr[number,number]		//长度区间	[最小值，最大值]
- * type ：number		//标准 0 = 只要长度够，都可以; 1 = 数字加字母组合; 2 = 数字加字母加符号
- * call ：function	//回调方法
+ * judgeType ：number	//标准类型; 默认0;  0 = 只要长度够，都可以; 1 = 数字加字母组合
+ * color : arr			//显示强度颜色	["默认色"，"强度色"]
+ * weak : arr			//弱密码数组
+ * tips ：object		//提示语		{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"}
+ * eyes : boolean		//是否出现密码可见icon true = 出现; false = 隐藏
+ * eyesArr : arr 		//可见icon的地址或内容 eyes=true时，必填
+ * call ：function		//回调方法
  */
 /******************** 开始 ********************/
 (function($){
@@ -24,17 +23,15 @@
 		/**
 		 * 声明全局变量
 		 */
-		var defaults, options, domName = this, objs, dfunc;
+		var domName = this, defaults, options, objs, dfunc, regObj;
 
 		defaults = {
-			id : null,
+			judgeType : 0,
 			color : ["gray","orange"],
-			weak : ["asdfgh","qwerty","zxcvbn","Password","Passwd","Woaini","Iloveyou","Woaiwojia","521521","5201314","7758521","1314520","1314521","520520","201314","211314","7758258","147258369","159357","123456","1234567","12345678","123456789","654321","123123","123321","123abc"],
-			tips : {"0":"请输入密码", "1":"长度不对","2":"弱密码，建议修改","success":"可用"},
+			weak : ["123456","123123","456456","789789","asdasd","zxczxc","qweqwe"],
+			tips : {"0":"请输入密码", "1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"},
 			eyes : true,
 			eyesArr : ["&#xe638;","&#xe639;"],
-			len : [6,20],
-			type : 0,
 			callback : null
 		};
 		options = $.extend(defaults, options);
@@ -84,6 +81,11 @@
 				domName.keyup(function(){
 					dfunc.ver($(this).val());
 				});
+
+				//回调方法
+				if(options.callback){
+					options.callback();
+				};
 			},
 
 			//验证
@@ -109,9 +111,18 @@
 					};
 				};
 
+				//如果必须要包含数字加字母组合
+				if(options.judgeType == 1 && (regObj.allNum.test(num)||regObj.allEn.test(num))) {
+					objs.tips.html(options.tips[3]);
+					//直接显示0 不可用
+					dfunc.countResult(0);
+					return false;
+				};
+
 				//其他情况 计算分数
 				dfunc.countScroe(num);
 				objs.tips.html(options.tips.success);
+				
 			},
 
 			//计算分数
@@ -173,7 +184,6 @@
 				//计算密码强度
 				dfunc.countResult(dfunc.countLevel(score));
 			},
-
 			//计算密码等级
 			countLevel : function(score){
 				var LV = 0;
@@ -211,6 +221,11 @@
 					objs.levelColor.animate({"width":0},300);
 				}
 			}
+		};
+
+		regObj = {
+		    allNum: /^[1-9]\d*$/,		//纯数字
+		    allEn: /^[A-Za-z]+$/		//纯字母
 		};
 
 		dfunc.init(options,objs);

@@ -2,12 +2,13 @@
 
 ## 一：插件说明
 ###最近更新
+- V1.1.0 :  增加判断定义模式+callback；删除id和len属性
 - V1.0.1 :  优化-如果是 小于等于 IE8 则隐藏 点击密码可见功能
 - V1.0.0 ： 创建该插件
  
 ###兼容性
 - IE9+（支持可见可选）
-- IE8-（暂时不支持可见）
+- IE8-（暂时不支持可见功能）
 
 ###线上地址
 - [戳这里](http://whj.fayfox.com/demo/plugIn.passwordStrength/)
@@ -18,14 +19,16 @@
  * 无
  *
  * 以下均为可选参数
- * id : string		//该dom的id号
- * color : arr		//显示强度颜色	["默认色"，"描边色"，"强度色"]
- * weak : arr		//弱密码数组
- * tips ：object	//提示语{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","success":"可用"}
- * eyes : boolean	//是否出现密码可见icon true = 出现; false = 隐藏
- * len : arr[number,number]	//长度区间	[最小值，最大值]
- * type ：number		//标准 0 = 只要长度够，都可以; 1 = 数字加字母组合; 2 = 数字加字母加符号
- * call ：function	//回调方法
+ * judgeType ：number	//标准类型; 默认0;  0 = 只要长度够，都可以; 1 = 数字加字母组合
+ * color : arr			//显示强度颜色	["默认色"，"强度色"]
+ * weak : arr			//弱密码数组
+ * tips ：object		//提示语		{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"}
+ * eyes : boolean		//是否出现密码可见icon true = 出现; false = 隐藏
+ * eyesArr : arr 		//可见icon的地址或内容 eyes=true时，必填
+ * call ：function		//回调方法
+ *
+ * 默认弱密码
+ * ["123456","123123","456456","789789","asdasd","zxczxc","qweqwe"]
 </pre>
 
 ###使用方法
@@ -36,8 +39,6 @@
 ## 二：分数计算
 <mark> 初始分数 = 0 </mark>
 ### 1.判断长度
-
-
 <table>
 	<thead>
 		<tr>
