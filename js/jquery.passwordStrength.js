@@ -1,9 +1,9 @@
 /**
  * @url     --
- * @data    2015.09.24
+ * @data    2015.09.16
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.1.1 - 增加tipSet 提示语位置可自定义
+ * @version V1.1.2 - 增加,如果密码可用，则代码提示位置的data-boo=1，否则一出data-boo
  */
 /********************* 传参说明 *********************/
 /**
@@ -18,6 +18,7 @@
  * call ：function		//回调方法
  */
 /******************** 开始 ********************/
+
 
 (function($){
 	$.fn.passwordStrength = function(options){
@@ -100,6 +101,7 @@
 				var vLen = num.length,
 					weakList = options["weak"].length,
 					i = 0;
+				objs.tips.removeAttr("data-boo");
 
 				//1. 如果长度小于6
 				if(vLen < 6){
@@ -128,7 +130,7 @@
 
 				//其他情况 计算分数
 				dfunc.countScroe(num);
-				objs.tips.html(options.tips.success);
+				objs.tips.attr("data-boo", 1).html(options.tips.success);
 
 			},
 
@@ -218,13 +220,13 @@
 			//计算密码强度
 			countResult : function(LV){
 
-				if(LV >= 5) {
+				if(LV >= 5) {	//强
 					objs.levelColor.animate({"width":"100%"},300);
-				} else if( LV ==4 ){
+				} else if( LV ==4 ){	//中
 					objs.levelColor.animate({"width":"66.7%"},300);
-				} else if( LV > 1 && LV < 4 ) {
+				} else if( LV > 1 && LV < 4 ) {	//弱
 					objs.levelColor.animate({"width":"33.4%"},300);
-				} else {
+				} else {	//不可用
 					objs.levelColor.animate({"width":0},300);
 				}
 			}
