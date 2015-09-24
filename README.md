@@ -2,6 +2,7 @@
 
 ## 一：插件说明
 ###最近更新
+- V1.1.1 :  增加tipSet 提示语位置可自定义
 - V1.1.0 :  增加判断定义模式+callback；删除id和len属性
 - V1.0.1 :  优化-如果是 小于等于 IE8 则隐藏 点击密码可见功能
 - V1.0.0 ： 创建该插件
@@ -23,6 +24,7 @@
  * color : arr			//显示强度颜色	["默认色"，"强度色"]
  * weak : arr			//弱密码数组
  * tips ：object		//提示语		{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"}
+ * tipSet : null		//提示语位置，默认null，出现在input后面,如果传入值，则出现在传入的值内
  * eyes : boolean		//是否出现密码可见icon true = 出现; false = 隐藏
  * eyesArr : arr 		//可见icon的地址或内容 eyes=true时，必填
  * call ：function		//回调方法

@@ -1,9 +1,9 @@
 /**
  * @url     --
- * @data    2015.09.16
+ * @data    2015.09.24
  * @author  wuhaijing
  * @mail    1004609378@qq.com
- * @version V1.1.0 - 增加判断定义模式+callback；删除id和len属性
+ * @version V1.1.1 - 增加tipSet 提示语位置可自定义
  */
 /********************* 传参说明 *********************/
 /**
@@ -11,12 +11,14 @@
  * judgeType ：number	//标准类型; 默认0;  0 = 只要长度够，都可以; 1 = 数字加字母组合
  * color : arr			//显示强度颜色	["默认色"，"强度色"]
  * weak : arr			//弱密码数组
- * tips ：object		//提示语		{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"}
+ * tips ：object			//提示语		{"0":"友情提示提示"，"1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"}
+ * tipSet : null		//提示语位置，默认null，出现在input后面,如果传入值，则出现在传入的值内
  * eyes : boolean		//是否出现密码可见icon true = 出现; false = 隐藏
  * eyesArr : arr 		//可见icon的地址或内容 eyes=true时，必填
  * call ：function		//回调方法
  */
 /******************** 开始 ********************/
+
 (function($){
 	$.fn.passwordStrength = function(options){
 
@@ -30,6 +32,7 @@
 			color : ["gray","orange"],
 			weak : ["123456","123123","456456","789789","asdasd","zxczxc","qweqwe"],
 			tips : {"0":"请输入密码", "1":"长度不对","2":"弱密码，建议修改","3":"请输入数字+字母组合","success":"可用"},
+			tipSet : null,
 			eyes : true,
 			eyesArr : ["&#xe638;","&#xe639;"],
 			callback : null
@@ -72,7 +75,11 @@
 				};
 
 				//提示位置
-				objs.bar.append(objs.tips);
+				if(options.tipSet){
+					objs.tips = options.tipSet;
+				} else {
+					objs.bar.append(objs.tips);
+				};
 
 				//等级显示
 				objs.levelBar.append(objs.levelColor);
@@ -122,7 +129,7 @@
 				//其他情况 计算分数
 				dfunc.countScroe(num);
 				objs.tips.html(options.tips.success);
-				
+
 			},
 
 			//计算分数
@@ -224,8 +231,8 @@
 		};
 
 		regObj = {
-		    allNum: /^[1-9]\d*$/,		//纯数字
-		    allEn: /^[A-Za-z]+$/		//纯字母
+			allNum: /^[1-9]\d*$/,		//纯数字
+			allEn: /^[A-Za-z]+$/		//纯字母
 		};
 
 		dfunc.init(options,objs);
@@ -233,3 +240,4 @@
 	};
 
 })(jQuery);
+
